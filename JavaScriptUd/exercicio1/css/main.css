@@ -1,0 +1,51 @@
+body{
+    background-color: rgba(83, 83, 253, 0.986);
+    font: normal 18pt arial;
+}
+
+header{
+    color: white;
+    text-align:center;
+}
+footer{
+    color: white;
+    text-align: center;
+}
+section{
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
+}
+#btn1{
+    width: 150px;
+    height: 50px;
+    margin: 30px;
+    border-radius: 10px;
+    border:none;
+    background-color: rgb(63, 63, 152);
+    color: white;
+    font-family: tahoma;
+    font-size: 18px;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+}
+#btn1:hover{
+    background-color: blue;
+    transition: 1s;
+}
+#peso, #altura{
+    width: 280px;
+    height: 30px;
+}
+#peso:focus, #altura:focus{
+    outline: 1px solid blue;
+}
+td{
+    padding: 0 15px;
+}

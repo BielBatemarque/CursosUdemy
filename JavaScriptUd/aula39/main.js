@@ -1,0 +1,6 @@
+// exercicio funçõ sobre o tamanho da imagem, fazendo uma funçõ para saber o dimensionamento dela.
+
+function ePaisagem(largura, altura){
+    return largura >= altura ? true : false;
+}
+console.log(ePaisagem(1920, 180));

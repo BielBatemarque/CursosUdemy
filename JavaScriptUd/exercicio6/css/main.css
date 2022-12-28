@@ -1,0 +1,41 @@
+body{
+    background-color: rgba(83, 83, 253, 0.986);
+    font: normal 18pt arial;
+}
+
+header{
+    color: white;
+    text-align:center;
+}
+footer{
+    color: white;
+    text-align: center;
+}
+section{
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
+}
+.display{
+    font-size: 2em;
+    width: 100%;
+    text-align: right;
+}
+.btn{
+    width: 100%;
+    height: 50px;
+    font-size: 1em;
+    border: none;
+    background-color: #dfdfdf;
+    cursor:pointer;
+}
+.btn:hover{
+    background-color: #787575;
+}
+.btn-eq{
+    background-color: royalblue;
+}

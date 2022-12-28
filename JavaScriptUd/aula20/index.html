@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio formulário</title>
+</head>
+<body>
+    <section>
+        <form class="form">
+            <p>Nome:<input type="text" name="nome"  id="nome"> </p>
+            <p>Sobrenome:  <input type="text" name="sobrenome" id="sobrenome">
+            </p>
+            <p>Peso:<input type="number" name="peso" id="peso">
+            </p>
+            <p>Altura:<input type="number" name="altura" id="altura"><br></p>
+                <input type="submit" name="enviar" id="enviar" value="enviar">
+        </form>
+        <div class="resultado"></div>
+    </section>
+    <script>
+        function meuEscolpo(){
+            const form = document.querySelector('.form');
+            const res = document.querySelector('.resultado');
+            const pessoas = [];
+            function recebeEventoForm(evento){
+                evento.preventDefault();
+                var nome = form.querySelector('#nome').value;
+                var sobrenome = form.querySelector('#sobrenome').value;
+                var peso = form.querySelector('#peso').value;
+                var altura = form.querySelector('#altura').value;
+              
+                pessoas.push({
+                    nome:nome,
+                    sobrenome: sobrenome,
+                    peso:peso,
+                    altura:altura
+                });
+                console.log(pessoas);
+                res.innerHTML += `<p>${nome} ${sobrenome} ${altura} ${peso}</p>`
+            }
+            form.addEventListener('submit', recebeEventoForm);
+        }
+        meuEscolpo();
+    </script>
+</body>
+</html>

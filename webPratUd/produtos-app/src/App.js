@@ -4,7 +4,7 @@ import CategoryRegister from "./components/CategoryRegister";
 import ProductList from "./components/ProductList";
 import ProductRegister from "./components/ProductRegister";
 import { useState } from "react";
-
+import { Container } from "@mui/system";
 
 function App() {
   const [visivel, setVisivel] = useState(1);
@@ -20,13 +20,16 @@ function App() {
   }
  }
   return (
-    <div className="App">
+    <div>
+      {/* <Menu/> */}
+      <Container>
         <button onClick={() =>{setVisivel(1)}}>Cadastro de produtos</button>
         <button onClick={() =>{setVisivel(2)}}>listagem de produtos</button>
         <button onClick={() =>{setVisivel(3)}}>Cadastro de categorias</button>
         <button onClick={() =>{setVisivel(4)}}>Listagem de Categorias</button>
       {seletorDeComponente()}
-      </div>
+      </Container>
+    </div>
   );
 }
 

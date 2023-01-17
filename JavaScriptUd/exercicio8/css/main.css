@@ -1,0 +1,44 @@
+body{
+    background-color: rgba(83, 83, 253, 0.986);
+    font: normal 18pt arial;
+}
+
+header{
+    color: white;
+    text-align:center;
+}
+footer{
+    color: white;
+    text-align: center;
+}
+section{
+    background-color: white;
+    width: 600px;
+    padding: 20px;
+    /* text-align: center; */
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
+}
+input{
+    width: 550px;
+    height: 35px;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+}
+button{
+    margin: 0 auto;
+    width: 150px;
+    height: 40px;
+    font-size: 1em;
+    background-color: rgb(131, 213, 213);
+    border-radius: 15px;
+    border: solid 1px black;
+    box-shadow: 5px 5px 10px black;
+}
+.error-text{
+    font-size: 12px;
+    color: red;
+}

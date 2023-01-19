@@ -1,11 +1,12 @@
 //aula sobre Promise
-//promises ->
+//promises -> Promsesas
 
 function rand(min, max){
     min *= 1000;
     max *= 1000;
     return Math.floor(Math.random() * (max - min ) + min);
 }
+/*Solução com callback*/ 
 
 // function esperaAi(msg, tempo, callback){
 //     setTimeout(()=>{
@@ -15,12 +16,12 @@ function rand(min, max){
 //         }
 //     },tempo);
 // }
-/*Solução com callback*/ 
 // esperaAi('frase1', rand(1,3), () =>{
 //     esperaAi('frase2', rand(1,3), () => {
 //         esperaAi('frase3', rand(1,3));
 //     });
 // });
+
 /* Solução com Promise */
 function esperaAi(msg, tempo){
     return new Promise((resolve, reject) => {

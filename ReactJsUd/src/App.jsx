@@ -4,6 +4,7 @@ import { Component } from 'react';
 class App extends Component{
       // this.handlePclick = this.handlePclick.bind(this);
         state = {
+          conter: 0,
           posts: [
             {
               id:1,
@@ -22,12 +23,38 @@ class App extends Component{
             }
           ]
       };
+      timeOutUpdate = null;
 
+
+      componentDidMount(){
+
+        //faz assim que o componente é montado na pagina
+        this.handleTimeOut();
+      }
+
+      componentDidUpdate(){
+        //disparado quando o componente é atualizado
+        this.handleTimeOut();
+      }
+
+      componentWillUnmount(){
+        clearTimeout(this.timeOutUpdate);
+      }
+
+      handleTimeOut = () => {
+        const { posts, conter } = this.state;
+        posts[0].title = 'O titulo mudou';
+
+      this.timeOutUpdate =  setTimeout(()=>{
+          this.setState({ posts, conter: conter + 1 })
+        }, 5000);
+      }
 
   render(){
-      const { posts } = this.state;
+      const { posts, conter } = this.state;
     return (
           <div className="App">
+            <h1>{conter}</h1>
             {posts.map((post) => { return(
               <div key={post.id}>
             <h1>{post.title}</h1>

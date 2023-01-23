@@ -1,5 +1,6 @@
 //aula sobre ajax -> asyncono javaScriptXLM
 //requisições asyncronas
+//AULA SOBRE FECH apI
 //modelo 'atual' utilizando Promises
 // const request = (obj) => {
 //     return new Promise((resolve, reject) => {

@@ -7,7 +7,6 @@ class App extends Component{
           posts: []
       };
 
-
       componentDidMount(){
       this.LoadPosts();
       } 
@@ -17,9 +16,10 @@ class App extends Component{
         
        const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos');
 
-        const [ posts, photos] = await Promise.all([postsResponse, photosResponse])
-        const postsJson = await posts.json();
-        const photosJson = await photos.json();
+       const [ posts, photos] = await Promise.all([postsResponse, photosResponse])
+
+      const postsJson = await posts.json();
+      const photosJson = await photos.json();
 
         const postAndPhotos = postsJson.map((post, index) => {
           return { ...post, cover: photosJson[index].url}
@@ -35,13 +35,13 @@ class App extends Component{
           <div className="posts">
             <h1>{}</h1>
             {posts.map((post) => { return(
-              <div className="post">
-                <img src={post.cover} alt="alternativo" />
-                <div key={post.id} className="post-content">
-                 <h1>{post.title}</h1>
-                <p>{post.body}</p>
+             <div className="post">
+               <img src={post.cover} alt="alternativo" />
+                 <div key={post.id} className="post-content">
+                  <h1>{post.title}</h1>
+                   <p>{post.body}</p>
+                </div>
             </div>
-          </div>
             )})}
           </div>
       </section>

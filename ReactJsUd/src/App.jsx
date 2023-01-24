@@ -1,5 +1,6 @@
 import './App.css';
 import { Component } from 'react';
+import { PostCard } from './components/PostCard';
 
 class App extends Component{
       // this.handlePclick = this.handlePclick.bind(this);
@@ -35,13 +36,7 @@ class App extends Component{
           <div className="posts">
             <h1>{}</h1>
             {posts.map((post) => { return(
-             <div className="post">
-               <img src={post.cover} alt="alternativo" />
-                 <div key={post.id} className="post-content">
-                  <h1>{post.title}</h1>
-                   <p>{post.body}</p>
-                </div>
-            </div>
+             <PostCard key ={post.id} title={post.title} body={post.body} id={post.id} cover={post.cover}/>
             )})}
           </div>
       </section>

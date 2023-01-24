@@ -4,63 +4,48 @@ import { Component } from 'react';
 class App extends Component{
       // this.handlePclick = this.handlePclick.bind(this);
         state = {
-          conter: 0,
-          posts: [
-            {
-              id:1,
-              title:'o titulo 1',
-              body: 'O corpo 1'
-            },
-            {
-              id:2,
-              title:'o titulo 2',
-              body: 'O corpo 2'
-            },
-            {
-              id:3,
-              title:'o titulo 3',
-              body: 'O corpo 3'
-            }
-          ]
+          posts: []
       };
-      timeOutUpdate = null;
 
 
       componentDidMount(){
-        //faz assim que o componente é montado na pagina
-        this.handleTimeOut();
-      }
+      this.LoadPosts();
+      } 
 
-      componentDidUpdate(){
-        //disparado quando o componente é atualizado
-        this.handleTimeOut();
-      }
+      LoadPosts = async () => { 
+       const postsResponse =  fetch('https://jsonplaceholder.typicode.com/posts');
+        
+       const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos');
 
-      componentWillUnmount(){
-        clearTimeout(this.timeOutUpdate);
-      }
+        const [ posts, photos] = await Promise.all([postsResponse, photosResponse])
+        const postsJson = await posts.json();
+        const photosJson = await photos.json();
 
-      handleTimeOut = () => {
-        const { posts, conter } = this.state;
-        posts[0].title = 'O titulo mudou';
+        const postAndPhotos = postsJson.map((post, index) => {
+          return { ...post, cover: photosJson[index].url}
+        });
 
-      this.timeOutUpdate =  setTimeout(() => {
-          this.setState({ posts, conter: conter + 1 })
-        }, 1000);
+        this.setState({ posts: postAndPhotos});
       }
 
   render(){
-      const { posts, conter } = this.state;
+      const { posts } = this.state;
     return (
-          <div className="App">
-            <h1>{conter}</h1>
+      <section className='container'>
+          <div className="posts">
+            <h1>{}</h1>
             {posts.map((post) => { return(
-              <div key={post.id}>
-              <h1>{post.title}</h1>
-             <p>{post.body}</p>
+              <div className="post">
+                <img src={post.cover} alt="alternativo" />
+                <div key={post.id} className="post-content">
+                 <h1>{post.title}</h1>
+                <p>{post.body}</p>
             </div>
+          </div>
             )})}
           </div>
+      </section>
+
         );
     }
 }

@@ -20,6 +20,9 @@ class Home extends Component{
     async componentDidMount(){
         await this.LoadPosts();
       } 
+      componentDidUpdate(){
+        console.log('Prop', this.props);
+      }
 
       LoadPosts = async () => { 
         const {page, postsPerPage} = this.state;

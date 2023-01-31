@@ -64,7 +64,7 @@ export const Home = () => {
       )}
 
       {filteredPosts.length === 0 && (
-        <p>Não existem posts =(</p>
+        <h1>Não existem posts</h1>
       )}
 
       <div className="button-container">

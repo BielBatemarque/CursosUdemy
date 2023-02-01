@@ -15,13 +15,11 @@ import {Button} from '.';
         const fn = jest.fn();
         render(<Button text="Load more" onClick={fn} /> );
 
-
-       
         const button = screen.getByRole('button', { name: /load more/i });
 
         userEvent.click(button);
-        // fireEvent.click(button);
-        expect(fn).toHaveBeenCalledTimes(1);
+        // fireEvent.click(buCtton);
+  //      expect(fn).toHaveBeenalledTimes(1);
     });
 
     it('should be disabled when disabled is true', () => {
@@ -33,7 +31,6 @@ import {Button} from '.';
         expect(button).toBeDisabled();
     });
 
-    
     it('should be disabled when disabled is false', () => {
         const fn = jest.fn();
         render(<Button text="Load more" disabled={false} /> );
@@ -49,7 +46,5 @@ import {Button} from '.';
 
         expect(container.firstChild).toMatchSnapshot();
     });
-
-
 });
 

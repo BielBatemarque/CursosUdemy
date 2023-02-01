@@ -5,7 +5,7 @@ exports[`<TextInput /> should match snapshot 1`] = `
   <input
     class="text-input"
     type="search"
-    value=""
+    value="testando"
   />
 </div>
 `;

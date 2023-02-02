@@ -2,6 +2,7 @@ import { render, screen, waitForElementToBeRemoved } from '@testing-library/reac
 import { Home } from '.';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import userEvent from '@testing-library/user-event';
 
 const handlres = [
   rest.get('https://jsonplaceholder.typicode.com/posts', async (req, res, ctx) => {
@@ -53,8 +54,24 @@ describe('<Home/>', () => {
     render(<Home />);
     const noMorePost = screen.getByText('Não existem posts');
 
+    //expect.assertions(2);
+
     await waitForElementToBeRemoved(noMorePost);
-    screen.debug();
+    
+    // const search = screen.getByPlaceholderText('');
+    //expect(search).toBeInTheDocument();
+
+    const images = screen.getAllByRole('img', {name: /title/i });
+    expect(images).toHaveLength(2);
+
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
+
+ // userEvent.click(button);
+ //   expect(screen.getByRole('heading', { name: 'title 3'})).toBeInTheDocument();
+
   });
+
+
 });
 

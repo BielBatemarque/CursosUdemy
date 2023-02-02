@@ -22,7 +22,7 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log(new Date().toLocaleString('pt-BR'));
+    // console.log(new Date().toLocaleString('pt-BR'));
     handleLoadPosts(0, postsPerPage);
   }, [handleLoadPosts, postsPerPage]);
 
@@ -64,7 +64,7 @@ export const Home = () => {
       )}
 
       {filteredPosts.length === 0 && (
-        <h1>Não existem posts</h1>
+        <p>Não existem posts</p>
       )}
 
       <div className="button-container">

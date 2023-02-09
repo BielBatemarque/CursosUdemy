@@ -1,68 +1,36 @@
-import { createContext, useContext, useReducer, useRef } from 'react';
+import {  useState, useRef, useEffect } from 'react';
 import './App.css';
 
-//actions.js
-export const actions ={
-  CHANGE_TITLE : 'CHANGE_TITLE'
+const useMyHook = (cb, delay = 1000) => {
+  const savedCb = useRef();
+
+  useEffect(() => {
+    savedCb.current = cb;
+  }, [cb]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      cb();
+    }, delay);
+    return () => clearInterval(interval);
+  }, [delay]);
 };
-
-
-//data.js
-export const globalState = {
-  title: 'O titulo que contexto',
-  body: 'O body do contexto',
-  counter: 0,
-};
-
-//reducers
-export const reducer = (state, action) => {
-    switch(action.type){
-      case actions.CHANGE_TITLE:{
-        console.log('Mudar titulo');
-        return {...state, title: action.payload }
-      }
-    }
-  return {...state};
-}
-
-//Appcontext
-export const Context = createContext();
-export const AppContext = ({children}) => {
-  const [state, dispatch] = useReducer(reducer, globalState);
-
-  const changeTitle = (payload) => {
-    dispatch({ type: actions.CHANGE_TITLE, payload })
-  };
-
-  return (
-    <Context.Provider value={{ state, changeTitle }}>
-        {children}
-    </Context.Provider>
-  );
-}
-//H1- index.jsx
-
-export const H1 = () => {
-    const context = useContext(Context);
-    const inputRef = useRef();
-
-    return(
-      <>
-      <h1 onClick={()=> context.changeTitle(inputRef.current.value)}>{context.state.title}</h1>
-      <input type="text" ref={inputRef} />
-      </>
-    );
-}
-
 
 function App() {
+  const [conter, setCounter] = useState(0);
+  const [delay, setDelay] = useState(1000);
+  const [incrementor, setIncrementor] = useState(100);
+  
+  useMyHook(() => setCounter((c) => c + 1), delay);
   return(
-    <AppContext>
-      <div>
-        <H1 />
-      </div>
-    </AppContext>
-  );
+    <div> 
+      <h1> contador: {conter} </h1>
+      <h1> delay: {delay} </h1>
+      <button onClick={() => {setDelay(d => d + incrementor)}}>+{incrementor}</button>
+      <button onClick={() => {setDelay(d => d - incrementor)}}>-{incrementor}</button> <br />
+      <input type="number" value={incrementor} onChange={(e) => setIncrementor(Number(e.target.value))} />
+    </div>
+    );
 }
 
 export default App;

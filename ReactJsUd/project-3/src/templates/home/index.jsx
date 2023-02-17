@@ -1,52 +1,43 @@
-import { useState, useRef, useLayoutEffect, forwardRef, useImperativeHandle } from 'react';
+import { useDebugValue, useEffect, useState } from 'react';
 
-const Home = () => {
-  const [counted, setCounted] = useState([0,1,2,3,4]);
-  const divRef = useRef();
+const useMediaQuerry = (queryValue, initialValue = false) => {
+  const[match, setMatch] = useState(initialValue);
 
-  useLayoutEffect(() => {
-    const now = Date.now();
-    while(Date.now() < now + 600);
-    divRef.current.divRef.scrollTop = divRef.current.scrollHeight;
-  });
+  useDebugValue(`Querry: ${queryValue}`);
 
-  const handleCLick = () => {
-    setCounted(c => [...c, + c.slice(-1) + 1]);
-    divRef.current.handleClick();
-  };
+  useEffect(() =>{
+    var isMounted = true;
+    const matchMedia = window.matchMedia(queryValue);
 
+    const handleChange = () =>{
+      if(!isMounted) return;
+      setMatch(Boolean(matchMedia.matches));
+    };
 
-  return(
-    <>
-      <button onClick={handleCLick}>Count: {counted.slice(-1)}</button>
-        <DispplayCounted  counted={counted} ref={divRef}/>
-    </> 
-  );
+    matchMedia.addEventListener('change', handleChange);
+    setMatch(!!matchMedia.matches);
+    
+    return () => {
+      isMounted = false;
+      matchMedia.removeEventListener('change', handleChange);
+    }
+
+  }, [queryValue]);
+
+  return match;
 }
 
-export const DispplayCounted = forwardRef( function DisplayCounted ({counted}, ref){
-  const [rand, setRand] = useState('0.24');
-  const divRef = useRef();
-
-  const handleClick = () => {
-    setRand(Math.random().toFixed(2));
-  };
-
-  useImperativeHandle(ref, () => ({
-    handleClick,
-    divRef: divRef.current,
-  }));
-
+const Home = () => {
+ const huge =  useMediaQuerry('(min-width: 980px)');
+ const big = useMediaQuerry('(max-width: 978px) and (min-width: 768px)');
+ const medium = useMediaQuerry('(max-width: 767px) and (min-width: 321px)');
+ const small = useMediaQuerry('(max-width: 321px)');
  
-  return(   
-    <div ref={divRef} style={{height: '100px', width:'100px', overflowY: 'scroll' }}>
-    {counted.map((c) => {
-    return <p key={`c-${c}`}
-      onClick={handleClick}
-    >{c} +++ {rand}</p>
-  })}
-  </div>
+
+ const background = huge ? 'green' : big ? 'red' : medium ? 'yellow' :small ? 'purple' : null;
+ return(
+    <div style={{fontSize: '60px', background}}>oi</div>
   );
-})
+}
 
 export default Home;

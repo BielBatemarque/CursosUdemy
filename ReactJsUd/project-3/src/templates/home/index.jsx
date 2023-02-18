@@ -25,7 +25,7 @@ class MyErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       // Você pode renderizar qualquer UI alternativa
-      return <p {...s}>Deu ruim =(</p>;
+      return <p {...s}>Deu ruim </p>;
     }
 
     return this.props.children;

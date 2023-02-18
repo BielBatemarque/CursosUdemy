@@ -1,43 +1,71 @@
-import { useDebugValue, useEffect, useState } from 'react';
+import { useState, useEffect, Component } from 'react';
 
-const useMediaQuerry = (queryValue, initialValue = false) => {
-  const[match, setMatch] = useState(initialValue);
+const s ={
+  style: {
+    fontSize : '60px',
+  },
+};
 
-  useDebugValue(`Querry: ${queryValue}`);
+class MyErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-  useEffect(() =>{
-    var isMounted = true;
-    const matchMedia = window.matchMedia(queryValue);
+  static getDerivedStateFromError(error) {
+    // Atualiza o state para que a próxima renderização mostre a UI alternativa.
+    return { hasError: true };
+  }
 
-    const handleChange = () =>{
-      if(!isMounted) return;
-      setMatch(Boolean(matchMedia.matches));
-    };
+  componentDidCatch(error, errorInfo) {
+    // Você também pode registrar o erro em um serviço de relatórios de erro
+    console.log(error, errorInfo);
+  }
 
-    matchMedia.addEventListener('change', handleChange);
-    setMatch(!!matchMedia.matches);
-    
-    return () => {
-      isMounted = false;
-      matchMedia.removeEventListener('change', handleChange);
+  render() {
+    if (this.state.hasError) {
+      // Você pode renderizar qualquer UI alternativa
+      return <p {...s}>Deu ruim =(</p>;
     }
 
-  }, [queryValue]);
-
-  return match;
+    return this.props.children;
+  }
 }
+
+const ItWillThrowError = () => {
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    if(counter > 3){
+      throw new Error('que chato');
+    }
+  }, [counter]);
+
+  return <div>
+    <button {...s} onClick={() => setCounter((s) => s + 1)}>Clitck to increase {counter}</button>
+  </div>
+};
 
 const Home = () => {
- const huge =  useMediaQuerry('(min-width: 980px)');
- const big = useMediaQuerry('(max-width: 978px) and (min-width: 768px)');
- const medium = useMediaQuerry('(max-width: 767px) and (min-width: 321px)');
- const small = useMediaQuerry('(max-width: 321px)');
- 
-
- const background = huge ? 'green' : big ? 'red' : medium ? 'yellow' :small ? 'purple' : null;
- return(
-    <div style={{fontSize: '60px', background}}>oi</div>
+  return(
+    <div {...s}>
+    <MyErrorBoundary>
+      <ItWillThrowError /> 
+    </MyErrorBoundary>
+    <MyErrorBoundary>
+      <ItWillThrowError /> 
+    </MyErrorBoundary>
+    <MyErrorBoundary>
+      <ItWillThrowError /> 
+    </MyErrorBoundary>
+    <MyErrorBoundary>
+      <ItWillThrowError /> 
+    </MyErrorBoundary>
+    <MyErrorBoundary>
+      <ItWillThrowError /> 
+    </MyErrorBoundary>
+    </div>
   );
-}
+};
 
 export default Home;

@@ -17,11 +17,11 @@ const TurnOnOff = ({ children }) => {
 };
 const TurnedOn = ({ children }) => { 
   const { isOn } = useContext(TurnOnOffContext);
-  return isOn ? children : null
+  return isOn ? children : null;
 };
 const TurnedOff = ({ children }) => {
   const {isOn} = useContext(TurnOnOffContext);
-  return isOn ? null : children
+  return isOn ? null : children;
 };
 const TurnButton = ({ ...props }) => {
   const { isOn, onTurn } = useContext(TurnOnOffContext);
@@ -45,9 +45,9 @@ const Home = () => {
       <TurnedOff>
         <P>Aqui vem as coisas do OFF.</P>
       </TurnedOff>
-      <TurnButton {...s} />
        </section>
       </div>
+      <TurnButton {...s} />
     </TurnOnOff>
   );
 };

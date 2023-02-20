@@ -1,55 +1,25 @@
-// Compound Components
-import { Children, cloneElement, createContext, useContext, useState } from 'react';
 
-const s = {
-  style: {
-    fontSize: '60px',
-  },
-};
+import React, { Suspense, useState } from 'react';
+// import LazyComponent from './lazy-component';
 
-const TurnOnOffContext = createContext();
+const loadComponent = () => {
+  console.log('Componente carregando...');
+  return import('./lazy-component');
+};
+const LazyComponent = React.lazy(loadComponent);
 
-const TurnOnOff = ({ children }) => {
-  const [isOn, setIsOn] = useState(false);
-  const onTurn = () => setIsOn((s) => !s);
+export const Home = () => {
+  const [show, setShow] = useState(false);
 
-  return <TurnOnOffContext.Provider value={{ isOn, onTurn }}>{children}</TurnOnOffContext.Provider>
-};
-const TurnedOn = ({ children }) => { 
-  const { isOn } = useContext(TurnOnOffContext);
-  return isOn ? children : null;
-};
-const TurnedOff = ({ children }) => {
-  const {isOn} = useContext(TurnOnOffContext);
-  return isOn ? null : children;
-};
-const TurnButton = ({ ...props }) => {
-  const { isOn, onTurn } = useContext(TurnOnOffContext);
   return (
-    <button onClick={onTurn} {...props}>
-      Turn {isOn ? 'OFF' : 'ON'}
-    </button>
+    <div>
+      <p>
+        <button onMouseOver={loadComponent} onClick={() => setShow((s) => !s)}>
+          Show {show ? 'LC on screen' : 'LC is off screen'}
+        </button>
+      </p>
+      <Suspense fallback={<p>Carregando...</p>}>{show && <LazyComponent />}</Suspense>
+    </div>
   );
 };
-const P = ({ children }) => <p {...s}>{children}</p>;
-
-const Home = () => {
-  return (
-    <TurnOnOff>
-      <div>
-       <p>oi</p>
-       <section>
-      <TurnedOn>
-        <P>Aqui as coisas que vão acontecer quando estiver ON.</P>
-      </TurnedOn>
-      <TurnedOff>
-        <P>Aqui vem as coisas do OFF.</P>
-      </TurnedOff>
-       </section>
-      </div>
-      <TurnButton {...s} />
-    </TurnOnOff>
-  );
-};
-
 export default Home;

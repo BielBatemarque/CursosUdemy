@@ -3,11 +3,11 @@ import * as actionTypes from './actions-types';
 
 export const reducer = (state, action) => {
     console.log(action);
-    switch(actionTypes){
+    switch(action.type){
         case actionTypes.INCREASE:
             return {...state, counter: state.counter + 1};
         case actionTypes.DECREASE:
-            return {...state, counter: state.counter + 1};
+            return {...state, counter: state.counter - 1};
         case actionTypes.RESET:
             return {...initialState};
         case actionTypes.SET_COUNTER:
@@ -18,9 +18,6 @@ export const reducer = (state, action) => {
             return {...state, loading : false, counter: state.counter + 1};
         case actionTypes.ASYNC_INCREASE_ERROR:
             return {...state, loading: false};
-
-        
     }
-
   return state;
-}
+};

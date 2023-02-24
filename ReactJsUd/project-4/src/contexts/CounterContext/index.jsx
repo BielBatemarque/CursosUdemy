@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState, useRef } from "react";
+import { createContext, useContext, useReducer, useRef } from "react";
 import { buildActions } from "./build-actions";
 import { reducer } from "./reducer";
 
@@ -20,6 +20,7 @@ export const CounterContextProvider = ({ children }) => {
 
 export const useCounterContext = () => {
     const context = useContext(Context);
+
     if(typeof context === 'undefined'){
         throw new Error('you have to use useCounterContext inside <CounterContextProvider />');
     }

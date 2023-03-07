@@ -3,8 +3,8 @@ import { useCallback, useEffect, useState } from 'react';
 import './styles.css';
 
 import { Posts } from '../../components/Posts';
-import { loadPosts } from '../../utils/load-posts'
-import {Button} from '../../components/button/index'
+import { loadPosts } from '../../utils/load-posts';
+import { Button } from '../../components/button/index';
 import { TextInput } from '../../components/TextInput';
 
 export const Home = () => {
@@ -78,6 +78,6 @@ export const Home = () => {
       </div>
     </section>
   );
+};
 
-}
 export default Home;

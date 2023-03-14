@@ -21,8 +21,8 @@ const props = {
         body: 'body3',
         cover: 'img/img3.png',
         },
-    ]
-}
+    ],
+};
 
 
 describe('<Posts />', () => {

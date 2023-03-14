@@ -13,9 +13,9 @@ export const Posts = ({posts = []}) => (
 
 Posts.defaultProps = { 
   posts: [],
-}
+};
 
 Posts.propTypes = {
   posts: P.array,
 
-}
+};
